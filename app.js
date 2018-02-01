@@ -22,6 +22,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req, res, next) {
+  return res.redirect(301, `https://${req.subdomains.reverse().join('.')}.lenom.io${req.url}`);
+});
+
 app.use('/', index);
 app.use('/users', users);
 
