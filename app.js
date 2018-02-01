@@ -23,7 +23,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
-  return res.redirect(301, `https://${req.subdomains.reverse().join('.')}.lenom.io${req.url}`);
+  var sub = `${req.subdomains.reverse().join('.')}`;
+  return res.redirect(301, `https://${sub ? sub + '.' : ''}wingzy.io${req.url}`);
 });
 
 app.use('/', index);
