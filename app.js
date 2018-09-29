@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -24,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
   var sub = `${req.subdomains.reverse().join('.')}`;
-  return res.redirect(301, `https://${sub ? sub + '.' : ''}wingzy.io${req.url}`);
+  return res.redirect(301, `https://${sub ? sub + '.' : ''}${process.env.TARGET_DOMAIN}${req.url}`);
 });
 
 app.use('/', index);
